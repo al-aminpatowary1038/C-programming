@@ -13,7 +13,7 @@ int Palindrome(char s1[])
     for(i=length-1,j=0;i>=0;i--,j++)
     {
         s2[j]=s1[i];
-        //s2[j+1]='\0';
+        s2[j+1]='\0';
     }
     int p = strcmp(s1,s2);
     return p;
