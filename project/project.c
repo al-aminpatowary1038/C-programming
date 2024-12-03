@@ -9,7 +9,7 @@
 #define Backsp 8
 
 FILE *file; // File for Store User Information;
-FILE *stufile; // File for store Student Information;
+FILE *Sfile; // File for store Student Information;
 
 // User Define Data type for User;
  struct user{
@@ -34,12 +34,12 @@ struct student{
     char Sname [50];
     char Semail [50];
     char Sid [15];
-    char sphone [16];
-    char semester[15];
+    char Sphone [16];
+    char Semester[15];
     int courseNum;
     struct Course courInfo[8];
 };
-struct student studentInfo;
+struct student stuInfo;
 
 
 
@@ -82,35 +82,77 @@ void pswd(char password2[50]){
 }
 // Registration System;
 void Regi(){
-
     char password2[50];
-    int flag =0;
+    int NF =0,Co=0,Ps=0,flag=0;
     system("cls");
-    printf("\t\t\t\t------Hey!! Welcome To Registration Functionality ------\n");
-    printf("Enter your Full Name: \t");
-    fgets(User.fname,50,stdin);
-    printf("Enter your Contact No: \t");
-    fgets(User.phone,50,stdin);
-    while(flag ==0){
-    printf("Enter your Email Id: \t");
-    fgets(User.email,50,stdin);
-    for(int i=0; i<strlen(User.email);i++){
-        if(User.email[i]== '@'){
-           flag =1;
-           break;
+    printf("\t\t\t\t****Welcome To Registration Functionality****\n");
+    while(NF==0)
+    {
+        printf("Enter your Full Name: \t");
+        fgets(User.fname,50,stdin);
+        for(int i=0; i<strlen(User.fname); i++)
+        {
+            if(User.fname[i]>= 'A' && User.fname [i]<= 'Z' || User.fname[i]>= 'a' && User.fname [i]<= 'z')
+            {
+                NF = 1;
+                break;
+            }
         }
-        }
-        if(flag==1){
+        if(NF==1)
+        {
+            while(Co==0)
+            {
+                printf("Enter your Contact No: \t");
+                fgets(User.phone,50,stdin);
+                for(int i=0; i<strlen(User.phone); i++)
+                {
+                    if(User.phone[i]>= '0' && User.phone [i]<= '9')
+                    {
+                         Co=1;
+                        break;
 
-    printf("Enter your Password: \t");
-    pswd(User.pass);
-    printf("\nConfirm Your Password: \t");
-    pswd(password2);
+                    }
+                }
+                if(Co==1)
+                {
+                    while(flag ==0)
+                    {
+                        printf("Enter your Email Id: \t");
+                        fgets(User.email,50,stdin);
+                        for(int i=0; i<strlen(User.email); i++)
+                        {
+                            if(User.email[i]== '@')
+                            {
+                                flag =1;
+                                break;
+                            }
+                        }
+                        if(flag==1)
+                        {
+
+                            printf("Enter your Password: \t");
+                            pswd(User.pass);
+                            printf("\nConfirm Your Password: \t");
+                            pswd(password2);
+                        }
+                        else
+                        {
+                            printf("Please Enter  a Valid Email Id\n");
+                        }
+                    }
+                }
+                else{
+                    printf("Enter a Valid Number\n");
+                }
+            }
         }
-        else{
-            printf("Please Enter  a Valid Email Id\n");
+        else
+        {
+            printf("Please Enter  a Valid Name\n");
         }
     }
+
+
     if(strcmp(User.pass,password2)==1){
         printf("\nYour Password Don't Match\n");
     }
@@ -130,7 +172,7 @@ void Regi(){
           }
           fclose(file);
     }
-    GoBack();
+    Gomain();
 }
 // Login System;
 void Login()
@@ -182,6 +224,7 @@ void Functions()
         Menu();
         int F;
         scanf("%d",&F);
+        getchar();
         switch(F)
         {
         case 0:
@@ -228,9 +271,7 @@ void Functions()
         }
     }
 
-
-
-    // Main Menu
+// Main Menu
 void Menu(){
 
     printf("\n\n\t~~~Student Database Management System~~~\n\n");
@@ -251,20 +292,211 @@ void Menu(){
 
 }
 
+void Addstudent()
+{
+    int sn=0,id=0,em=0,sp=0;
+    system("cls");
+    Sfile = fopen("Studentinfo.txt","a");
+    if(Sfile==NULL)
+    {
+        printf("Error Opening!\n");
+        return;
+    }
+    while(sn==0)
+    {
+        printf("\nEnter Student Name: \t");
+        fgets(stuInfo.Sname,50,stdin);
+        stuInfo.Sname[strcspn(stuInfo.Sname,"\n")] = 0;
+        for(int i=0; i<strlen(stuInfo.Sname); i++)
+        {
+            if(stuInfo.Sname[i]>= 'A' && stuInfo.Sname [i]<= 'Z' || stuInfo.Sname[i]>= 'a' && stuInfo.Sname [i]<= 'z' || stuInfo.Sname[i] == ' ')
+            {
+                sn=1;
+                break;
+            }
+        }
 
+        if(sn==1)
+        {
+            while(id==0)
+            {
+                printf("\tEnter Student Id: ");
+                fgets(stuInfo.Sid,15,stdin);
+                stuInfo.Sid[strcspn(stuInfo.Sid,"\n")] = 0;
+                for(int i=0; i<strlen(stuInfo.Sid); i++)
+                {
+                    if(stuInfo.Sid[i]>= '0' && stuInfo.Sid[i] <= '9')
+                    {
+                        id=1;
+                        break;
+                    }
+                }
+                if(id == 1)
+                {
+                    while(em==0)
+                    {
+                        printf("\tEnter Student Email Id: ");
+                        fgets(stuInfo.Semail,50,stdin);
+                        stuInfo.Semail[strcspn(stuInfo.Semail,"\n")] = 0;
+                        for(int i=0; i<strlen(stuInfo.Semail); i++)
+                        {
+                            if(stuInfo.Semail[i] == '@')
+                            {
+                                em=1;
+                                break;
+                            }
+                        }
 
+                        if(em == 1)
+                        {
+                            while(sp==0)
+                            {
+                                printf("\tEnter Student Contract No: ");
+                                fgets(stuInfo.Sphone,16,stdin);
+                                stuInfo.Sphone[strcspn(stuInfo.Sphone,"\n")] = 0;
+                                for(int i=0; i<strlen(stuInfo.Sphone); i++)
+                                {
+                                    if(stuInfo.Sphone[i]>='0' && stuInfo.Sphone[i]<= '9')
+                                    {
+                                        sp=1;
+                                        break;
+                                    }
+                                }
+                                if(sp==1)
+                                {
+                                    printf("\tEnter Semester: ");
+                                    fgets(stuInfo.Semester,15,stdin);
+                                    stuInfo.Semester[strcspn(stuInfo.Semester,"\n")] = 0;
 
-void Addstudent(){
+                                    printf("\nEnter Number of Course: ");
+                                    scanf("%d",&stuInfo.courseNum);
+                                    getchar();
+                                    for(int i =0; i<stuInfo.courseNum; i++)
+                                    {
+                                        printf("\tEnter Course name %d: ",i+1);
+                                        fgets(stuInfo.courInfo[i].courname, sizeof(stuInfo.courInfo[i].courname),stdin);
+                                        printf("\tEnter Course Code %d: ",i+1);
+
+                                        fgets(stuInfo.courInfo[i].courCode, sizeof(stuInfo.courInfo[i].courCode),stdin);
+                                    }
+                                    if(fwrite(&stuInfo, sizeof(struct student), 1, Sfile) != 1){
+                                        printf("Something went Wrong!\n");
+                                    }
+                                    fclose(Sfile);
+                                    printf("\nStudent Added Successfully!\n");
+                                }
+                                else
+                                {
+                                    printf("\nEnter a Valid Contract Number!");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            printf("\nEnter a Valid Email Id!");
+                        }
+                    }
+                }
+                else
+                {
+                    printf("\nEnter a Valid Student Id!");
+                }
+            }
+        }
+        else
+        {
+            printf("\nEnter a Valid Name");
+        }
+    }
+    GoBack();
 }
 
 
-void ShowAll(){
+
+void ShowAll() {
+    system("cls");
+    Sfile = fopen("Studentinfo.txt", "r");
+    if (Sfile == NULL) {
+        printf("\tSomething Went Wrong!\n");
+        return;
+    }
+    printf("\n\t\t\t\t\tAll Student List\n\n");
+    printf("|============|======================|==============================|==================|============|=============|\n");
+    printf("|     ID     |         NAME         |            EMAIL             |       PHONE      |  Semester  |   NO.COURSE |\n");
+    printf("|============|======================|==============================|==================|============|=============|\n");
+
+    while (fread(&stuInfo, sizeof(struct student), 1, Sfile)) {
+        printf("| %s", stuInfo.Sid);
+        for (int i = 0; i < 11 - strlen(stuInfo.Sid); i++) {
+            printf(" ");
+        }
+        printf("| %s", stuInfo.Sname);
+        for (int i = 0; i < 21 - strlen(stuInfo.Sname); i++) {
+            printf(" ");
+        }
+        printf("| %s", stuInfo.Semail);
+        for (int i = 0; i < 29 - strlen(stuInfo.Semail); i++) {
+            printf(" ");
+        }
+        printf("| %s", stuInfo.Sphone);
+        for (int i = 0; i < 17 - strlen(stuInfo.Sphone); i++) {
+            printf(" ");
+        }
+        printf("| %s", stuInfo.Semester);
+        for (int i = 0; i < 11 - strlen(stuInfo.Semester); i++) {
+            printf(" ");
+        }
+        printf("| %d", stuInfo.courseNum);
+        for (int i = 0; i < 12 - snprintf(NULL, 0, "%d", stuInfo.courseNum); i++) {
+            printf(" ");
+        }
+        printf("|\n");
+        printf("|============|======================|==============================|==================|============|=============|\n");
+    }
+    fclose(Sfile);
 }
 
 void Search_A_stu(){
+
+    char Id [15];
+    int fo =0;
+    system("cls");
+  Sfile = fopen("Studentinfo.txt","r");
+  if(Sfile == NULL){
+    printf("Something Went Wrong");
+  }
+  printf("Enter Student Id: ");
+  fgets(Id,10,stdin);
+  Id[strcspn(Id,"\n")] = 0;
+
+  while(fread(&stuInfo, sizeof(struct student),1,Sfile)){
+
+    if(strcmp(stuInfo.Sid , Id)==0){
+        printf("\nStudent Name:     %s",stuInfo.Sname);
+        printf("\nStudent ID:       %s",stuInfo.Sid);
+        printf("\nStudent Email:    %s",stuInfo.Semail);
+        printf("\nStudent Phone NO: %s",stuInfo.Sphone);
+        printf("\nSemester:         %s\n",stuInfo.Semester);
+        printf("Number Of Courses:  %d\n",stuInfo.courseNum);
+        for(int i=0;i<stuInfo.courseNum;i++){
+
+            printf("Course %d Name:\t%s",i+1,stuInfo.courInfo[i].courname);
+            printf("Course %d Code:\t%s",i+1,stuInfo.courInfo[i].courCode);
+        }
+        fo = 1;
+        break;
+    }
+  }
+  if(fo==0){
+    printf("Student Not Found!\n");
+  }
+  fclose(Sfile);
+
 }
 
 void Edit_student(){
+    system("cls");
+    printf("")
 }
 
 
@@ -296,6 +528,7 @@ void About(){
     printf("\tWe are students of Software Engineering Department\n");
 }
 
+
 void Gofunc(){
     getchar();
     system("cls");
@@ -305,16 +538,17 @@ void Gofunc(){
 void GoBack(){
     getchar();
     char a;
-    printf("\n\nFor Go Back To Functions Page Press [F]");
-    printf("\nFor Go Back To Home Page Press [B]\n");
+    printf("\n\nFor Go Back Press [B]");
+    printf("\t\tFor Go Back To Home Page Press [H]\t\t");
     printf("For Exit This System Press [0]\n");
     printf("Enter Your choice: ");
     scanf("%c",&a);
-    if(a== 'b' || a== 'B'){
+    getchar();
+    if(a== 'H' || a== 'h'){
     system("cls");
         main();
     }
-    else if(a=='f' || a=='F'){
+    else if(a=='B' || a=='b'){
          Functions();
     }
     else{
@@ -322,7 +556,23 @@ void GoBack(){
     }
 }
 
+void Gomain(){
+    getchar();
+    char mm;
+    printf("\n\nFor Go Back To Home Page Press [H]\t\t");
+    printf("For Exit This System Press [0]\n");
+    printf("Enter Your choice: ");
+    scanf("%c",&mm);
+    getchar();
+    if(mm == 'H' || mm == 'h'){
+    system("cls");
+       main();
+    }
+    else{
+        ExitProgram();
 
+    }
+}
 
 void ExitProgram(){
     system("cls");
@@ -339,7 +589,7 @@ void ExitProgram(){
 
 int main(){
 
-    system("color A0");
+    system("color B0");
     int a;
     printf("\t\t\t\t------ Welcome to Student Database System ------");
     printf("\n\n\tPlease Choose Your Option");
@@ -363,5 +613,5 @@ int main(){
         printf("\nWrong Choice!");
         }
      }
-    getch();
+    getchar();
 }
