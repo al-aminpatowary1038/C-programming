@@ -165,6 +165,7 @@ void Regi() {
 // faculty Login System;
 void Login() {
     system("cls");
+    
     char username[50], pword[50];
     int usrfound = 0;
     printf("\t\t\t\t------Hey!! Welcome To Login Functionality ------\n");
@@ -612,11 +613,12 @@ void DeleteStu() {
 }
 
 void deleteAllStudents() {
+     system("cls");
     int status = remove("infgo.txt");
     if (status == 0) {
-        printf("All student records deleted successfully!\n");
+        printf("\n\tAll student records deleted successfully!\n");
     } else {
-        printf("Error deleting student records!\n");
+        printf("\n\tError deleting student records!\n");
     }
     GoBack();
 }
