@@ -245,14 +245,6 @@ void Functions() {
             system("cls");
             GoBack();
             break;
-        case 8:
-            UserGuid();
-            GoBack();
-            break;
-        case 9:
-            About();
-            GoBack();
-            break;
         default:
             printf("\nWrong Choice\n");
     }
@@ -271,8 +263,6 @@ void Menu() {
     printf("\t\t[5] Delete A Student.\n");
     printf("\t\t[6] Delete All Data.\n");
     printf("\t\t[7] Clear The window.\n");
-    printf("\t\t[8] User Guideline.\n");
-    printf("\t\t[9] About Us.\n");
     printf("\t\t[0] Logout.\n");
     printf("\t\t=======================\n");
     printf("\nChoice a Functionality: ");
@@ -500,6 +490,10 @@ void EsclearInputBuffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
+void seRclearInputBuffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
 // student information update function
 void Edit_student() {
     system("cls");
@@ -656,8 +650,8 @@ void UserGuid() {
     system("cls");
     printf("\n\t\t\t\t\tHow To Work Our System\n\n");
     printf("\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n");
-    printf("\nIn Our System At First You Will Choose a Option Is You are a Faculty Member or You are a Student\n");
-    printf("If You Choose Option [1]. Faculty Member Then: ");
+    printf("\n\tIn Our System At First You Will Choose a Option Is You are a Faculty Member or You are a Student\n");
+    printf("\tIf You Choose Option [1]. Faculty Member Then: \n");
     printf("\t=> You Will Able to Store Student Data, Like: Student Name, ID, Email, Phone, Course Information\n");
     printf("\t=> Student Name can be 50 characters long\n");
     printf("\t=> Student Id can be unique for every student and Maximum 15 Characters long\n");
@@ -666,11 +660,12 @@ void UserGuid() {
     printf("\t=> Course Code can be 6 characters long\n");
     printf("\t=> Student can have maximum 8 courses and minimum 1 course\n");
     printf("\t=> Phone Number should be 16 characters long\n");
-    printf("If You choose Option [2]. Student Then :");
-    printf("\t=> You Will Only Able to Show Your Information Like: Your Name,ID,Email Id, Semester, Number of Courses and Course Information\n");
+    printf("\tIf You choose Option [2]. Student Then :\n");
+    printf("\t=> You Will Only Able to Show Your Information Like: Your Name,ID,Email Id, Semester,\n\tNumber of Courses and Course Information\n");
     printf("\t=> If you want to show your details at first you will Registration to our system.\n");
     printf("\t=> After The Registration Process system give a user name .\n");
     printf("\t=> You can Login in our system to use this user name and password\n");
+Gohmain();
 }
 
 
@@ -678,10 +673,26 @@ void About() {
     system("cls");
     printf("\n\t\t\t\t\t  ~~~~~ About Us ~~~~~\n\n");
     printf("\t\t\t|================================================================|\n\n");
-    printf("\tThis Is a simple Student Database Management System\n");
-    printf("\tTeam WXYZ developed this system for their course output\n");
-    printf("\tOur course name is Software Development Capstone Project\n");
-    printf("\tWe are students of Software Engineering Department\n");
+    printf("\t\t\t\tThis Is a simple Student Database Management System\n");
+    printf("\t\t\t\tTeam WXYZ developed this system for their course output\n");
+    printf("\t\t\t\tOur course name is Software Development Capstone Project\n");
+    printf("\t\t\t\tWe are students of Software Engineering Department\n");
+    Gohmain();
+}
+void Gohmain(){
+
+    char dd;
+    printf("\n\n\t\tFor Go Back To Home Page Press [H]\t");
+    printf("For Logout This System Press [0]\n");
+    printf("\t\tEnter Your choice: ");
+    scanf("%c",&dd);
+    if(dd =='H'|| dd == 'h')
+    {
+        main();
+    }
+    else{
+        ExitProgram();
+    }
 }
 
 void Gofunc(){
@@ -714,7 +725,8 @@ void GoBack(){
 void Gomain(){
     getchar();
     char mm;
-    printf("\n\nFor Go Back To Home Page Press [H]\t\t");
+    printf("\n\nFor Go Back  Press [B]\t");
+    printf("For Go Back To Home Page Press [H]\t");
     printf("For Logout This System Press [0]\n");
     printf("Enter Your choice: ");
     scanf("%c",&mm);
@@ -723,21 +735,50 @@ void Gomain(){
     system("cls");
        main();
     }
+    else if(mm=='B' || mm =='b'){
+        Faculty();
+    }
     else{
         ExitProgram();
 
     }
 }
-// exit function
 
-void ExitProgram() {
+void ExitProgram()
+{
+    char vh[2];
+
     system("cls");
     char mas[] = "~~~~~~Thanks For visiting us~~~~~~";
     printf("\n\n\t\t\t");
-    for (int i = 0; i < strlen(mas); i++) {
+    for (int i = 0; i < strlen(mas); i++)
+    {
         printf("%c", mas[i]);
     }
-    printf("\n\n\n");
+
+    printf("\n\n\nFor Go To Home Menu Press [H]\n");
+    printf("Enter Your Choice: ");
+    fgets(vh, sizeof(vh), stdin);
+
+    if (vh[0] == 'H' || vh[0] == 'h')
+    {
+        main();
+    }
+    else
+    {
+        printf("\n\n");
+        exit(0);
+    }
+}
+
+void Exit(){
+    system("cls");
+    char mas[] = "~~~~~~Thanks For visiting us~~~~~~";
+    printf("\n\n\t\t\t");
+    for (int i = 0; i < strlen(mas); i++)
+    {
+        printf("%c", mas[i]);
+    }
     exit(0);
 }
 
@@ -750,7 +791,8 @@ void Faculty() {
     printf("\n\n\tPlease Choose Your Option");
     printf("\n\t1. Signup");
     printf("\n\t2. Login");
-    printf("\n\t3. Exit");
+    printf("\n\t3. GO Back.");
+    printf("\n\t4. Exit");
     printf("\n\nEnter Your Choice: ");
     scanf("%d", &fa);
     getchar();
@@ -761,7 +803,10 @@ void Faculty() {
         case 2:
             Login();
             break;
-        case 3:
+        case 3 :
+            Back();
+            break;
+        case 4:
             ExitProgram();
             break;
         default:
@@ -846,7 +891,7 @@ void SFclearInputBuffer() {
  void Refresh(){
 
     char rh;
-    printf("\n\nFor Refresh Press [B]");
+    printf("\n\nFor Refresh Press [R]");
     printf("\tFor Go Back Press [B]\t");
     printf("For GoBack To Home Page Press [H]");
     printf("\tFor Logout This System Press [0]\n");
@@ -1037,10 +1082,8 @@ void Student(){
     printf("\t\t\t\t||==================================||\n");
     printf("\n\t\t\t\t\t1. Sign Up.");
     printf("\n\t\t\t\t\t2. Login.");
-    printf("\n\t\t\t\t\t3. User Guideline.");
-    printf("\n\t\t\t\t\t4. About US.");
-    printf("\n\t\t\t\t\t5. GO Back.");
-    printf("\n\t\t\t\t\t6. Exit.");
+    printf("\n\t\t\t\t\t3. GO Back.");
+    printf("\n\t\t\t\t\t4. Exit.");
     printf("\n\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
      printf("\n\t\t\t\t>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     printf("\n\n\t\t\t\t<<<Enter Your Choice>>>: ");
@@ -1054,15 +1097,9 @@ void Student(){
             sLogin();
             break;
         case 3:
-            About();
-            break;
-        case 4:
-             UserGuid();
-             break;
-        case 5:
             Back();
             break;
-        case 6:
+        case 4:
             ExitProgram();
             break;
         default:
@@ -1071,6 +1108,7 @@ void Student(){
 }
 
 int main(){
+    system("cls");
     system("color B0");
     printf("\n\n\n\n\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     printf("\n\t\t\t\t\t````````````````````````````````````````");
@@ -1079,7 +1117,9 @@ int main(){
     printf("\t\t\t\t\t||==================================||\n");
     printf("\n\t\t\t\t\t\t[1]. Faculty Member");
     printf("\n\t\t\t\t\t\t[2]. Student");
-    printf("\n\t\t\t\t\t\t[3]. Exit");
+    printf("\n\t\t\t\t\t\t[3]. User Guideline");
+    printf("\n\t\t\t\t\t\t[4]. About Us");
+    printf("\n\t\t\t\t\t\t[5]. Exit");
     printf("\n\t\t\t\t\t----------------------------------------");
     printf("\n\t\t\t\t\t----------------------------------------\n");
     printf("\t\t\t\t\t====>>>");
@@ -1094,7 +1134,15 @@ int main(){
            Student();
             break;
         case 3:
-            ExitProgram();
+            UserGuid();
+
+            break;
+        case 4 :
+            About();
+
+            break;
+        case 5:
+            Exit();
             break;
         default:
             printf("\nWrong Choice!");
