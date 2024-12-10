@@ -58,7 +58,8 @@ void g_username(char email[50], char userName[50]) {
         if (email[i] == '@') {
             userName[i] = '\0';
             break;
-        } else {
+        }
+         else {
             userName[i] = email[i];
         }
     }
@@ -72,23 +73,28 @@ void pswd(char password2[50]) {
         ch = getch();
         if (ch == Enter || ch == Tab) {
             password2[i] = '\0';
+
             break;
-        } else if (ch == Backsp) {
+        }
+        else if (ch == Backsp) {
             if (i > 0) {
                 i--;
                 printf("\b \b");
             }
-        } else {
+        }
+        else {
             password2[i++] = ch;
             printf("*");
         }
     }
 }
+
 void RclearInputBuffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
-// faculty Registration System;
+
+// Faculty Registration System;
 void Regi() {
     char password2[50];
     int NF = 0, Co = 0, Ps = 0, flag = 0;
@@ -132,22 +138,26 @@ void Regi() {
                             pswd(User.pass);
                             printf("\nConfirm Your Password: \t");
                             pswd(password2);
-                        } else {
+                        }
+                         else {
                             printf("Please Enter a Valid Email Id\n");
                         }
                     }
-                } else {
+                }
+                else {
                     printf("Enter a Valid Number\n");
                 }
             }
-        } else {
+        }
+        else {
             printf("Please Enter a Valid Name\n");
         }
     }
 
     if (strcmp(User.pass, password2) != 0) { // Use != 0 for mismatch
         printf("\nYour Password Don't Match\n");
-    } else {
+    }
+    else {
         g_username(User.email, User.usname);
         file = fopen("UserInfo.txt", "a+");
         if (file == NULL) {
@@ -157,7 +167,8 @@ void Regi() {
         if (fwrite(&User, sizeof(struct user), 1, file)) {
             printf("\nYour Registration is Successfully Completed");
             printf("\nYour User name is : \t%s", User.usname);
-        } else {
+        }
+        else {
             printf("\nSorry!! Something went wrong\n");
         }
         fclose(file);
@@ -169,6 +180,7 @@ void lclearInputBuffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
+
 
 // faculty Login System;
 void Login() {
@@ -253,7 +265,7 @@ void Functions() {
 // Main Menu
 void Menu() {
     printf("\n\n\t\t\t~~~Student Database Management System~~~\n\n");
-         printf("\t|================================================================|\n\n");
+    printf("\t|================================================================|\n\n");
     printf("\t\t\tMAIN MENU\n");
     printf("\t\t=======================\n");
     printf("\t\t[1] Add A New Student.\n");
@@ -280,7 +292,7 @@ void Addstudent() {
     system("cls");
     printf("\n\t\t\t\t\t\tStudent ADD Functionality \n");
     printf("\t\t\t|================================================================|\n\n");
-    Sfile = fopen("infgo.txt", "a");
+    Sfile = fopen("infgo.txt", "a+");
     if (Sfile == NULL) {
         printf("Error Opening!\n");
         return;
@@ -348,23 +360,28 @@ void Addstudent() {
                                     }
                                     if (fwrite(&stuInfo, sizeof(struct student), 1, Sfile) != 1) {
                                         printf("Something went Wrong!\n");
-                                    } else {
+                                    }
+                                    else {
                                         printf("\nStudent Added Successfully!\n");
                                     }
                                     fclose(Sfile);
-                                } else {
+                                }
+                                else {
                                     printf("\nEnter a Valid Contract Number!");
                                 }
                             }
-                        } else {
+                        }
+                        else {
                             printf("\nEnter a Valid Email Id!");
                         }
                     }
-                } else {
+                }
+                else {
                     printf("\nEnter a Valid Student Id!");
                 }
             }
-        } else {
+        }
+        else {
             printf("\nEnter a Valid Name");
         }
     }
@@ -380,7 +397,7 @@ void SSclearInputBuffer() {
 void Search_A_stu() {
     system("cls");
     printf("\n\t\t\t\t\t\t Searching Functionality\n ");
-         printf("\t\t\t|================================================================|\n\n");
+    printf("\t\t\t|================================================================|\n\n");
     char searchId[10];
     int found = 0, fo = 0;
 
@@ -426,7 +443,7 @@ void Search_A_stu() {
             printf("Course %d Name:\t%s",i+1,stuInfo.courInfo[i].courname);
             printf("Course %d Code:\t%s",i+1,stuInfo.courInfo[i].courCode);
         }
-        fo = 1;
+        found = 1;
         break;
     }
     }
@@ -450,9 +467,9 @@ void ShowAll() {
         return;
     }
     printf("\n\t\t\t\t\t~~~~~ All Student List ~~~~~\n\n");
-         printf("\t\t\t|================================================================|\n\n");
+    printf("\t\t\t|================================================================|\n\n");
     printf("|============|======================|==============================|==================|============|=============|\n");
-    printf("|     ID     |         NAME         |            EMAIL             |       PHONE      |  Semester  |   NO.COURSE |\n");
+    printf("|     ID     |         NAME         |            EMAIL             |       PHONE      |  SEMESTER  |   NO.COURSE |\n");
     printf("|============|======================|==============================|==================|============|=============|\n");
 
     while (fread(&stuInfo, sizeof(struct student), 1, Sfile)) {
@@ -490,7 +507,7 @@ void EsclearInputBuffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
-void seRclearInputBuffer() {
+void vseRclearInputBuffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
@@ -1128,7 +1145,7 @@ int main(){
     getchar();
     switch (a) {
         case 1:
-            Faculty ();
+            Faculty();
             break;
         case 2:
            Student();
